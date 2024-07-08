@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -27,8 +28,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
         jvmTarget = "17"
@@ -42,11 +43,16 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.androidx.room.gradle.plugin)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
     //Room
     implementation(libs.androidx.room.runtime)
-    annotationProcessor(libs.androidx.room.room.compiler3)
+    ksp(libs.androidx.room.room.compiler3)
+
+    //picasso
+    implementation (libs.glide)
+    ksp (libs.compiler)
 }
